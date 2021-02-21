@@ -14,31 +14,26 @@
  * limitations under the License.
  */
 
-module "app_infra_cloudbuild_project" {
+module "spoke_project" {
   source                      = "../../modules/single_project"
   impersonate_service_account = var.terraform_service_account
   org_id                      = var.org_id
   billing_account             = var.billing_account
-  folder_id                   = data.google_active_folder.common.name
-  environment                 = "shared"
+  folder_id                   = data.google_active_folder.env.name
+  environment                 = "development"
+  vpc_type                    = "base"
   alert_spent_percents        = var.alert_spent_percents
   alert_pubsub_topic          = var.alert_pubsub_topic
   budget_amount               = var.budget_amount
   project_prefix              = var.project_prefix
-  activate_apis               = ["cloudbuild.googleapis.com", "sourcerepo.googleapis.com", "cloudkms.googleapis.com"]
 
   # Metadata
-  project_suffix    = "sample-infra"
-  application_name  = "app-infra-pipelines"
+  project_suffix    = "sample-spoke"
+  application_name  = "bu1-sample-application"
   billing_code      = "1234"
   primary_contact   = "example@example.com"
   secondary_contact = "example2@example.com"
   business_code     = "bu1"
 }
 
-module "infra_pipelines" {
-  source                = "../../modules/infra_pipelines"
-  cloudbuild_project_id = module.app_infra_cloudbuild_project.project_id
-  billing_account       = var.billing_account
-  app_infra_repos       = ["bu1-example-app"]
-}
+
