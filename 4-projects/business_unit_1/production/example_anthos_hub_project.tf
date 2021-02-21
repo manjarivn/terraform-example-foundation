@@ -20,14 +20,12 @@ module "anthos_hub_project" {
   org_id                      = var.org_id
   billing_account             = var.billing_account
   folder_id                   = data.google_active_folder.env.name
-  environment                 = "development"
-  vpc_type                    = "restricted"
+  environment                 = "production"
   alert_spent_percents        = var.alert_spent_percents
   alert_pubsub_topic          = var.alert_pubsub_topic
   budget_amount               = var.budget_amount
   project_prefix              = var.project_prefix
-  activate_apis               = ["container.googleapis.com"]
-  
+
   # Metadata
   project_suffix    = "sample-anthos"
   application_name  = "bu1-sample-application"

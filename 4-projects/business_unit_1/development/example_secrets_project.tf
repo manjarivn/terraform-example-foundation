@@ -21,10 +21,12 @@ module "secrets_project" {
   billing_account             = var.billing_account
   folder_id                   = data.google_active_folder.env.name
   environment                 = "development"
+  vpc_type                    = "restricted"
   alert_spent_percents        = var.alert_spent_percents
   alert_pubsub_topic          = var.alert_pubsub_topic
   budget_amount               = var.budget_amount
   project_prefix              = var.project_prefix
+  activate_apis               = ["secretmanager.googleapis.com","cloudkms.googleapis.com"]  
 
   # Metadata
   project_suffix    = "sample-secrets"
