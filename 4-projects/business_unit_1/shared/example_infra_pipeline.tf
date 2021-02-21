@@ -42,4 +42,3 @@ module "infra_pipelines" {
   billing_account       = var.billing_account
   app_infra_repos       = ["bu1-example-app"]
 }
-
